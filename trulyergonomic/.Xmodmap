@@ -1,0 +1,4 @@
+keycode 100 = aring Aring aring Aring dead_diaeresis dead_abovering dead_diaeresis
+keycode 101 = ae AE ae AE dead_circumflex dead_caron dead_circumflex
+keycode 102 = Super_L NoSymbol Super_L
+keycode 132 = oslash Oslash oslash Oslash dead_acute dead_doubleacute dead_acute
