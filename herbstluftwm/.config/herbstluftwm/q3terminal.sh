@@ -15,11 +15,11 @@
 tag="${1:-scratchpad}"
 hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
 
-mrect=( $(hc monitor_rect -p "" ) )
-#mrect=( $(hc detect_monitors -l | awk -F '[+x]' 'NR<=1 {print $3, $4, $1, $2}') )
+#mrect=( $(hc monitor_rect -p "" ) )
+mrect=( $(hc detect_monitors -l | awk -F '[+x]' 'NR<=1 {print $3, $4, $1, $2}') )
 termwidth=$(( (${mrect[2]} * 8) / 10 ))
-termheight=400
-#termheight=800
+#termheight=400
+termheight=800
 
 rect=(
     $termwidth
