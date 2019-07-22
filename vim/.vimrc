@@ -204,7 +204,7 @@ endfunction
 command! -nargs=1 Find :call Find("<args>")
 endif
 
-colorscheme lettuce
+colorscheme gruvbox
 
 au! BufNewfile *.tex
 "au BufNewFile *.tex | read ~/blank.tex |set makeprg=latex\% |set ft=tex

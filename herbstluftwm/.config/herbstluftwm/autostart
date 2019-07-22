@@ -34,7 +34,7 @@ hc keybind XF86AudioMute spawn amixer set Master toggle
 #hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-r spawn dmenu_run
 hc keybind $Mod-Shift-c close
-hc keybind $Mod-Return spawn xterm -rv
+hc keybind $Mod-Return spawn xterm 
 
 hc keybind $Mod-Control-Shift-u spawn ~/.config/herbstluftwm/layout_switch.sh us
 hc keybind $Mod-Control-Shift-n spawn ~/.config/herbstluftwm/layout_switch.sh no
