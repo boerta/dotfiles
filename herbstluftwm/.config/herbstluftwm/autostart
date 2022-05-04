@@ -174,7 +174,7 @@ hc set auto_detect_monitors 1
 # 2560 x 1440
 
 hc keybind $Mod-F2 spawn ~/.config/herbstluftwm/toggle_dualhead.sh
-hc keybind $Mod-F1 chain , spawn herbstclient set_monitors 2560x1440+0+720 3840x2160+2560+0, spawn /etc/xdg/herbstluftwm/restartpanels.sh
+hc keybind $Mod-F1 chain , spawn herbstclient set_monitors 2560x1440+0+720 3840x2160+2560+0 , spawn /etc/xdg/herbstluftwm/restartpanels.sh
 
 hc keybind $Mod-F3 chain , spawn herbstclient set_monitors 2560x1440+0+720 1920x2160+2560+0 1920x1080+4480+0 1920x1080+4480+1080 , spawn /etc/xdg/herbstluftwm/restartpanels.sh
 
