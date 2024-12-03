@@ -1,0 +1,52 @@
+sudo ubuntu-drivers autoinstall
+
+sudo apt install vim
+sudo apt install git
+sudo apt install stow
+
+git clone github.com:boerta/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+stow herbstluftwm trulyergonomic vim
+cd
+
+#docker
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+ echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo apt install docker-compose
+
+sudo snap install intellij-idea-ultimate --classic
+
+sudo apt install make
+sudo apt install gcc
+sudo apt install libsecret-1-0 libsecret-1-dev
+cd /usr/share/doc/git/contrib/credential/gnome-keyring
+sudo make
+git config --global credential.helper /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+git config pull.rebase false
+sudo apt install maven
+sudo apt install libxml2-utils
+
+#få .m2/settings.xml på plass
+
+sudo apt install openjdk-16-jdk openjdk-16-doc
+
+
+sudo usermod -aG docker boerta
+
+sudo apt install zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+#path+=/home/boerta/bin in .zshrc
+#last ned og pakk ut https://github.com/docker/docker-credential-helpers i ~/bin
+
+
