@@ -6,6 +6,11 @@ hc() {
     herbstclient "$@"
 }
 
+
+is_first_start() {
+    ! hc silent get_attr my_loaded 2>/dev/null
+}
+
 hc emit_hook reload
 
 xsetroot -solid '#000000'
@@ -19,14 +24,19 @@ Mod=Mod4
 hc set wmname LG3D
 
 hc keybind $Mod-Control-Shift-space spawn ~/.config/herbstluftwm/q3terminal.sh
+#hc keybind $Mod-Control-Shift-space spawn ~/.config/herbstluftwm/q3terminal_v2.sh top
+#hc keybind $Mod-Control-Shift-Left spawn ~/.config/herbstluftwm/q3terminal_v2.sh left
+#hc keybind $Mod-Control-Shift-Right spawn ~/.config/herbstluftwm/q3terminal_v2.sh right
+#hc keybind $Mod-Control-Shift-Up spawn ~/.config/herbstluftwm/q3terminal_v2.sh top
+#hc keybind $Mod-Control-Shift-Down spawn ~/.config/herbstluftwm/q3terminal_v2.sh bottom
 
 xset s 300 600 &
-xss-lock -- /usr/bin/i3lock -c 000000
+xss-lock -- /usr/bin/i3lock -c 000000 &
 hc keybind $Mod-Escape spawn /usr/bin/i3lock -c 000000
 
-#hc keybind 0x1008ff13 spawn amixer set Master 10+ unmute
-#hc keybind 0x1008ff11 spawn amixer set Master 10- unmute
-#hc keybind 0x1008ff12 spawn amixer set Master toggle
+hc keybind 0x1008ff13 spawn amixer -D pulse sset Master 5%+
+hc keybind 0x1008ff11 spawn amixer -D pulse sset Master 5%-
+hc keybind 0x1008ff12 spawn amixer -D pulse sset Master toggle
 
 hc keybind $Mod-Control-Shift-l spawn bash -c "xlock -mode mandelbrot -count 100 && herbstclient reload"
 
@@ -34,10 +44,11 @@ hc keybind XF86AudioRaiseVolume spawn amixer set Master 5%+ unmute
 hc keybind XF86AudioLowerVolume spawn amixer set Master 5%- unmute
 hc keybind XF86AudioMute spawn amixer set Master toggle
 
-#hc keybind $Mod-Shift-q quit
+hc keybind $Mod-Control-Alt-Shift-q quit
+hc keybind $Mod-Control-Alt-Shift-r spawn /etc/xdg/herbstluftwm/restartpanels.sh
 hc keybind $Mod-Control-Shift-r reload
 hc keybind $Mod-Shift-r spawn dmenu_run
-hc keybind $Mod-Shift-c close
+hc keybind $Mod-Shift-q close
 #hc keybind $Mod-Return spawn xterm
 hc keybind $Mod-Return spawn rxvt -rv
 
@@ -64,9 +75,9 @@ hc keybind $Mod-Shift-j     shift down
 hc keybind $Mod-Shift-k     shift up
 hc keybind $Mod-Shift-l     shift right
 
-hc keybind $Mod-Shift-q     shift_to_monitor 1
-hc keybind $Mod-Shift-w     shift_to_monitor 0
-hc keybind $Mod-Shift-e     shift_to_monitor 2
+#hc keybind $Mod-Shift-q     shift_to_monitor 1
+#hc keybind $Mod-Shift-w     shift_to_monitor 0
+#hc keybind $Mod-Shift-e     shift_to_monitor 2
 
 # splitting frames
 # create an empty frame at the specified direction
@@ -105,6 +116,7 @@ hc keybind $Mod-period use_index +1 --skip-visible
 hc keybind $Mod-comma  use_index -1 --skip-visible
 
 # layouting
+hc keybind $Mod-Shift-i toggle always_show_frame
 hc keybind $Mod-r remove
 hc keybind $Mod-space cycle_layout 1
 hc keybind $Mod-s floating toggle
@@ -122,6 +134,7 @@ hc keybind $Mod-BackSpace   cycle_monitor
 hc keybind $Mod-Tab         cycle_all +1
 hc keybind $Mod-Shift-Tab   cycle_all -1
 hc keybind $Mod-c cycle
+hc keybind $Mod-Shift-c cycle -1
 hc keybind $Mod-i jumpto urgent
 
 # colors
@@ -142,7 +155,12 @@ hc set frame_transparent_width 5
 hc set frame_gap 4
 # add overlapping window borders
 hc set window_gap -2
-#hc set tabbed_max 1
+hc set_attr settings.tabbed_max true
+hc set_attr theme.title_font 'monospace:pixelsize=12'
+hc set_attr theme.padding_top 1
+hc set_attr theme.title_height 13
+hc set_attr theme.title_depth 3
+hc set_attr theme.title_when multiple_tabs
 hc set frame_padding 2
 hc set smart_window_surroundings 0
 hc set smart_frame_surroundings 1
@@ -167,16 +185,18 @@ herbstclient set tree_style '╾│ ├└╼─┐'
 # do multi monitor setup here, e.g.:
 #hc set_monitors 1920x1200+0+0 1920x1200+1920+0
 # or simply:
+hc attr settings.auto_detect_panels 0
 hc detect_monitors
-hc set auto_detect_monitors 1
+
 
 # 3840 x 2160
 # 2560 x 1440
 
 hc keybind $Mod-F2 spawn ~/.config/herbstluftwm/toggle_dualhead.sh
-hc keybind $Mod-F1 chain , spawn herbstclient set_monitors 2560x1440+0+720 3840x2160+2560+0 , spawn /etc/xdg/herbstluftwm/restartpanels.sh
+hc keybind $Mod-F1 chain , spawn herbstclient set_monitors 2560x1440+0+0 3840x2160+2560+0 , spawn /etc/xdg/herbstluftwm/restartpanels.sh
 
-hc keybind $Mod-F3 chain , spawn herbstclient set_monitors 2560x1440+0+720 1920x2160+2560+0 1920x1080+4480+0 1920x1080+4480+1080 , spawn /etc/xdg/herbstluftwm/restartpanels.sh
+hc keybind $Mod-F3 spawn ~/.config/herbstluftwm/toggle_F3.sh
+#hc keybind $Mod-F3 chain , spawn herbstclient set_monitors 2560x1440+0+0 1920x2160+2560+0 1920x1080+4480+0 1920x1080+4480+1080 , spawn /etc/xdg/herbstluftwm/restartpanels.sh
 
 #hc keybind $Mod-F1 chain , spawn herbstclient set_monitors 3840x2160+0+0 , spawn /etc/xdg/herbstluftwm/restartpanels.sh
 
@@ -188,9 +208,13 @@ hc keybind $Mod-F3 chain , spawn herbstclient set_monitors 2560x1440+0+720 1920x
 #hc keybind $Mod-Ctrl-F3 chain , spawn herbstclient set_monitors 3840x1080+0+0 1920x1080+0+1080 1920x1080+1920+1080 , spawn /etc/xdg/herbstluftwm/restartpanels.sh
 #hc keybind $Mod-Shift-Ctrl-F3 chain , spawn herbstclient set_monitors 3840x1080+0+1080 1920x1080+0+0 1920x1080+1920+0 , spawn /etc/xdg/herbstluftwm/restartpanels.sh
 
+hc keybind $Mod-F4 chain , spawn herbstclient set_monitors 2560x1440+0+0 1920x1080+2560+0 1920x1080+2560+1080 1920x1080+4480+0 1920x1080+4480+1080 , spawn /etc/xdg/herbstluftwm/restartpanels.sh
 #hc keybind $Mod-F4 chain , spawn herbstclient set_monitors 1920x1080+0+0 1920x1080+1920+0 1920x1080+0+1080 1920x1080+1920+1080 , spawn /etc/xdg/herbstluftwm/restartpanels.sh
 
-
+#if is_fisrt_start; then
+xset +fp /home/boerta/.local/share/fonts
+xset fp rehash
+#fi
 
 # find the panel
 panel=~/.config/herbstluftwm/panel.sh
@@ -205,3 +229,23 @@ if [ -s ~/.Xmodmap ]; then
 fi
 
 #~/.config/polybar/launch.sh
+
+hc rule class='discord' tag=1 focus=off
+hc rule class='slack' tag=1 focus=off
+hc rule class='firefox' tag=2 focus=off
+hc rule class='intellij-idea-ultimate' tag=3 focus=off
+hc rule class='google-chrome' tag=9 focus=off
+
+if hc silent new_attr bool my_not_first_autostart ; then
+    blueman-applet &
+    nm-applet &
+    #~/.config/herbstluftwm/qas.sh
+    flameshot &
+    naisdevice &
+    discord &
+    slack &
+    firefox &
+    intellij-idea-ultimate &
+    google-chrome &
+fi
+

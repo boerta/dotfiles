@@ -25,7 +25,6 @@ if orig=$(hc get_attr monitors.${idx}.my_orig_rect 2> /dev/null ) ; then
     )
     for ((i=0 ; i < mon_cnt ; i++ )) ; do
         # find the other monitor half and remove it
-        [ $i != $idx ] &&
         cmd+=( v and
                     ∧ compare monitors.${i}.my_orig_rect = "${orig[*]}"
                     ∧ remove_monitor $i
