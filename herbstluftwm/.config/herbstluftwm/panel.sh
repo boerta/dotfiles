@@ -1,7 +1,11 @@
-#!/usr/bin/env python3
+#!/usr/bin/env bash
 
-import barpyrus.mainloop
-import sys
+# Terminate already running bar instances
+ pkill -q lemonbar
 
-if __name__ == '__main__':
-    sys.exit(barpyrus.mainloop.main())
+# Wait until the processes have been shut down
+while pgrep -u $UID -x lemonbar >/dev/null; do sleep 1; done
+
+for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
+    ~/private/barpyrus/barpyrus.py $monitor &
+done

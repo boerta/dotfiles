@@ -10,10 +10,10 @@ else
     layout=$(setxkbmap -query | awk 'END{print $2}')
     case $layout in
         no)
-                xmodmap ~/.Xmodmap.no
+                xmodmap ~/.config/herbstluftwm/.Xmodmap.no
             ;;
         us)
-                xmodmap ~/.Xmodmap.us
+                xmodmap ~/.config/herbstluftwm/.Xmodmap.us
             ;;
         *)
                 xmodmap ~/.Xmodmap.us

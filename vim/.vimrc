@@ -16,7 +16,6 @@
 " set the X11 font to use
 " set guifont=-misc-fixed-medium-r-normal--14-130-75-75-c-70-iso8859-1
 
-
 " Make command line two lines high
 set ch=2
 " Make shift-insert work like in Xterm
@@ -215,7 +214,6 @@ set foldlevelstart=99
 set gfn=monospace\ 10
 
 filetype plugin on
-:let g:tex_flavor="latex"
 set grepprg=grep\ -nH\ $*
 
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
