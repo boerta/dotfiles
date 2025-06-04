@@ -9,13 +9,11 @@ hc keybind $Mod-Control-Shift-space spawn ~/.config/herbstluftwm/q3terminal.sh
 #hc keybind $Mod-Control-Shift-Up spawn ~/.config/herbstluftwm/q3terminal_v2.sh top
 #hc keybind $Mod-Control-Shift-Down spawn ~/.config/herbstluftwm/q3terminal_v2.sh bottom
 
-hc keybind $Mod-Escape spawn /usr/bin/i3lock -c 000000
+hc keybind $Mod-Escape spawn xscreensaver-command -lock
 
 hc keybind 0x1008ff13 spawn amixer -D pulse sset Master 5%+
 hc keybind 0x1008ff11 spawn amixer -D pulse sset Master 5%-
 hc keybind 0x1008ff12 spawn amixer -D pulse sset Master toggle
-
-hc keybind $Mod-Control-Shift-l spawn bash -c "xlock -mode mandelbrot -count 100 && herbstclient reload"
 
 hc keybind XF86AudioRaiseVolume spawn amixer set Master 5%+ unmute
 hc keybind XF86AudioLowerVolume spawn amixer set Master 5%- unmute
@@ -27,7 +25,7 @@ hc keybind $Mod-Control-Shift-r reload
 hc keybind $Mod-Shift-r spawn dmenu_run
 hc keybind $Mod-Shift-q close
 #hc keybind $Mod-Return spawn xterm
-hc keybind $Mod-Return spawn rxvt -rv
+hc keybind $Mod-Return spawn alacritty
 
 hc keybind $Mod-Control-Shift-u spawn ~/.config/herbstluftwm/layout_switch.sh us
 hc keybind $Mod-Control-Shift-n spawn ~/.config/herbstluftwm/layout_switch.sh no

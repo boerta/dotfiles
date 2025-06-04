@@ -29,7 +29,8 @@ xsetroot -solid '#000000'
 hc set wmname LG3D
 
 xset s 300 600 &
-xss-lock -- /usr/bin/i3lock -c 000000 &
+#xss-lock -- /usr/bin/i3lock -c 000000 &
+#autolock -detectsleep -time 5 -locker "i3lock -c 000000" &
 
 # Keybindings
 . "$HOME"/.config/herbstluftwm/keyBinds 
@@ -76,6 +77,8 @@ if is_first_start; then
 	flameshot &
 	blueman-applet &
 	lxqt-policykit-agent &
+    snixembed &
+    xscreensaver --no-splash &
    # start-pulseaudio-x11
 fi
 
@@ -99,7 +102,7 @@ fi
 #fi
 
 for monitor in $(hc list_monitors | cut -d: -f1) ; do
-    ~/private/barpyrus/barpyrus.py $monitor &
+    ~/bin/barpyrus/barpyrus.py $monitor &
 done
 
 hc unlock
